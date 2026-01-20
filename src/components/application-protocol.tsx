@@ -152,6 +152,9 @@ export function ApplicationProtocol() {
 
     if (currentStepConfig.validation) {
       setIsValid(currentStepConfig.validation(currentValue));
+    } else if (currentStepConfig.type === "textarea") {
+      // Textarea (motivation) is optional - always valid
+      setIsValid(true);
     } else {
       setIsValid(currentValue.length > 0);
     }
@@ -296,6 +299,14 @@ export function ApplicationProtocol() {
                           type="button"
                           onClick={() => {
                             updateFormData(currentStepConfig.field as keyof ApplicationData, option.value);
+                            // Auto-advance after selection with a small delay for visual feedback
+                            setTimeout(() => {
+                              if (currentStep === FORM_STEPS.length - 1) {
+                                processApplication();
+                              } else {
+                                nextStep();
+                              }
+                            }, 300);
                           }}
                           className={cn(
                             "w-full flex items-center justify-between p-4 rounded-lg border transition-all duration-200 text-left",
