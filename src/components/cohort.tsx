@@ -69,12 +69,12 @@ const itemVariants = {
   },
 };
 
-export function Residency() {
+export function Cohort() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="residency" ref={ref} className="relative py-32 px-6 border-t border-white/[0.05]">
+    <section id="cohort" ref={ref} className="relative py-32 px-6 border-t border-white/[0.05]">
       <div className="max-w-5xl mx-auto">
         {/* Section header */}
         <motion.div
@@ -84,7 +84,7 @@ export function Residency() {
           transition={{ duration: 0.8 }}
         >
           <span className="inline-block px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 border border-white/10 rounded-full mb-6">
-            The Residency
+            The Cohort
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
             12 Weeks to Transform
@@ -178,7 +178,7 @@ export function Residency() {
             </span>
             <a href="#apply">
               <Button size="lg" className="group uppercase tracking-wider">
-                <span>Apply for Residency</span>
+                <span>Apply for Cohort</span>
                 <Rocket className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </a>

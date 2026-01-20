@@ -1,7 +1,7 @@
 import { Hero } from "@/components/hero";
 import { RealityCheck } from "@/components/reality-check";
 import { TerminalDemo } from "@/components/terminal-demo";
-import { Residency } from "@/components/residency";
+import { Cohort } from "@/components/cohort";
 import { Testimonials } from "@/components/testimonials";
 import { ApplicationProtocol } from "@/components/application-protocol";
 import { Footer } from "@/components/footer";
@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
       <RealityCheck />
       <TerminalDemo />
-      <Residency />
+      <Cohort />
       <Testimonials />
       <ApplicationProtocol />
       <Footer />

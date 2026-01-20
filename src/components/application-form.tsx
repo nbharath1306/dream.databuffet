@@ -26,7 +26,7 @@ export function ApplicationForm() {
             Begin Protocol
           </span>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-            Apply for Residency
+            Apply for Cohort
           </h2>
           <p className="text-white/40 text-lg max-w-xl mx-auto">
             Submission does not guarantee acceptance. We review applications within 48 hours.
