@@ -160,10 +160,10 @@ export function ApplicationProtocol() {
     }
   }, [currentValue, currentStepConfig]);
 
-  // Focus input on step change
+  // Focus input on step change (without scrolling)
   useEffect(() => {
     const timer = setTimeout(() => {
-      inputRef.current?.focus();
+      inputRef.current?.focus({ preventScroll: true });
     }, 300);
     return () => clearTimeout(timer);
   }, [currentStep]);
@@ -202,7 +202,7 @@ export function ApplicationProtocol() {
     <section
       id="apply"
       ref={containerRef}
-      className="relative min-h-screen flex bg-black"
+      className="relative py-20 lg:py-32 flex bg-black border-t border-white/[0.05]"
     >
       {/* Main form area */}
       <div className="flex-1 flex flex-col">
