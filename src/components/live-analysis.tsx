@@ -175,7 +175,7 @@ export function LiveAnalysis({
         <div className="space-y-2 font-mono text-xs">
           <div className="flex items-center justify-between">
             <span className="text-white/50">Step</span>
-            <span className="text-white/80">{currentStep + 1}/6</span>
+            <span className="text-white/80">{currentStep + 1}/7</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-white/50">Flags</span>

@@ -164,7 +164,7 @@ const initialFormData: ApplicationData = {
 
 export const useApplicationStore = create<ApplicationStore>((set, get) => ({
   currentStep: 0,
-  totalSteps: 6,
+  totalSteps: 7,
   formData: initialFormData,
   analysisFlags: [],
   isProcessing: false,
