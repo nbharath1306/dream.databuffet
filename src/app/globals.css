@@ -116,3 +116,58 @@ body {
   color: #ffffff;
 }
 
+/* Protocol-specific animations */
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-flash {
+    animation: flash 0.5s ease-out;
+  }
+
+  @keyframes flash {
+    0% {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  .animate-scan {
+    animation: scan 2s linear infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse-cta 2s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse-cta {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
