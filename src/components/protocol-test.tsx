@@ -391,6 +391,7 @@ export function ProtocolTest() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className="min-h-screen bg-black flex items-center justify-center p-6"
         style={{ userSelect: "none" }}
       >
@@ -398,7 +399,7 @@ export function ProtocolTest() {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
             className="text-center"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full mb-8">
