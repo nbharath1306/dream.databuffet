@@ -307,9 +307,9 @@ export function TerminalDemo() {
           <p className="text-white/30 text-sm mb-4">
             98% of applicants fail this test. The 2% who pass? They're already employed.
           </p>
-          <button className="text-white/60 hover:text-white text-sm font-mono uppercase tracking-wider transition-colors">
+          <a href="/test" className="inline-block text-white/60 hover:text-white text-sm font-mono uppercase tracking-wider transition-colors">
             Take the Full Test →
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>
