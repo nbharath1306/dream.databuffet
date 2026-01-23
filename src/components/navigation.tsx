@@ -6,7 +6,7 @@ import { Terminal, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "Protocol", href: "#test" },
+  { label: "Protocol", href: "/test" },
   { label: "Cohort", href: "#cohort" },
   { label: "Alumni", href: "#alumni" },
   { label: "Apply", href: "/apply" },
