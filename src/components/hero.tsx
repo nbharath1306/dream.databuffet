@@ -122,7 +122,7 @@ export function Hero() {
 
         {/* CTA Button */}
         <motion.div variants={itemVariants}>
-          <a href="#test">
+          <a href="/apply">
             <Button size="lg" className="group uppercase tracking-wider">
               <span>Initiate Protocol</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

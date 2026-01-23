@@ -176,7 +176,7 @@ export function Cohort() {
             <span className="text-white/30 text-xs font-mono uppercase tracking-wider mb-4">
               Next Cohort: March 2026 • 12 Seats Remaining
             </span>
-            <a href="#apply">
+            <a href="/apply">
               <Button size="lg" className="group uppercase tracking-wider">
                 <span>Apply for Cohort</span>
                 <Rocket className="w-4 h-4 transition-transform group-hover:translate-x-1" />

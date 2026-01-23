@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Protocol", href: "#test" },
   { label: "Cohort", href: "#cohort" },
   { label: "Alumni", href: "#alumni" },
-  { label: "Apply", href: "#apply" },
+  { label: "Apply", href: "/apply" },
 ];
 
 export function Navigation() {
@@ -61,9 +61,11 @@ export function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <Button size="sm" className="uppercase tracking-wider text-xs">
-                Begin Protocol
-              </Button>
+              <a href="/apply">
+                <Button size="sm" className="uppercase tracking-wider text-xs">
+                  Begin Protocol
+                </Button>
+              </a>
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -113,9 +115,11 @@ export function Navigation() {
             }}
             transition={{ delay: 0.4 }}
           >
-            <Button size="lg" className="uppercase tracking-wider mt-4">
-              Begin Protocol
-            </Button>
+            <a href="/apply" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button size="lg" className="uppercase tracking-wider mt-4">
+                Begin Protocol
+              </Button>
+            </a>
           </motion.div>
         </nav>
       </motion.div>

@@ -13,6 +13,7 @@ import {
   AlertCircle,
   MessageSquare,
   Check,
+  Home,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -275,37 +276,67 @@ export function ApplicationProtocol() {
       ref={containerRef}
       className="relative py-20 lg:py-32 flex bg-black border-t border-white/[0.05]"
     >
+      {/* Back to Home Button */}
+      <div className="absolute top-6 left-6 z-10">
+        <a href="/">
+          <Button variant="ghost" size="sm" className="gap-2 text-white/40 hover:text-white">
+            <Home className="w-4 h-4" />
+            <span className="hidden sm:inline">Back to Home</span>
+          </Button>
+        </a>
+      </div>
+
       {/* Main form area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <div className="p-6 border-b border-white/[0.05]">
-          <div className="max-w-2xl mx-auto flex items-center justify-between">
-            {/* Progress */}
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-white/40">
-                Step {currentStep + 1}/{actualTotalSteps}
-              </span>
-              <div className="flex gap-1">
-                {FORM_STEPS.map((_, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "w-8 h-1 rounded-full transition-all duration-300",
-                      i < currentStep
-                        ? "bg-emerald-500"
-                        : i === currentStep
-                          ? "bg-white"
-                          : "bg-white/10"
-                    )}
-                  />
-                ))}
+          <div className="max-w-2xl mx-auto">
+            {/* Welcome message on first step */}
+            {currentStep === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center mb-8"
+              >
+                <h1 className="font-serif text-3xl md:text-4xl text-white mb-3">
+                  Application Protocol
+                </h1>
+                <p className="text-white/40 text-sm max-w-lg mx-auto">
+                  Welcome to the Data Buffet entrance protocol. This application takes 8-10 minutes.
+                  <br />
+                  <span className="text-white/60">Your responses help us match you with the right European partners.</span>
+                </p>
+              </motion.div>
+            )}
+            
+            <div className="flex items-center justify-between">
+              {/* Progress */}
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono text-white/40">
+                  Step {currentStep + 1}/{actualTotalSteps}
+                </span>
+                <div className="flex gap-1">
+                  {FORM_STEPS.map((_, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "w-8 h-1 rounded-full transition-all duration-300",
+                        i < currentStep
+                          ? "bg-emerald-500"
+                          : i === currentStep
+                            ? "bg-white"
+                            : "bg-white/10"
+                      )}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Step indicator */}
-            <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 border border-white/10 rounded-full">
-              The Protocol
-            </span>
+              {/* Step indicator */}
+              <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 border border-white/10 rounded-full">
+                The Protocol
+              </span>
+            </div>
           </div>
         </div>
 
