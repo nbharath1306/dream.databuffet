@@ -86,7 +86,7 @@ export function VerdictView({
           </h1>
 
           <p className="text-white/40 font-mono text-sm">
-            ID: {formData.email.split("@")[0].toUpperCase()}-
+            ID: {formData.name.split(" ")[0].toUpperCase()}-
             {Date.now().toString(36).toUpperCase()}
           </p>
         </motion.div>
@@ -119,7 +119,7 @@ export function VerdictView({
             <div className="flex items-center gap-2 text-xs text-white/30 font-mono">
               <span>Detected from:</span>
               <span className="text-white/50">
-                {formData.failureReason || "application data"}
+                {formData.careerBarriers ? "career barriers assessment" : "application data"}
               </span>
             </div>
           </motion.div>
@@ -310,10 +310,10 @@ export function VerdictView({
             </div>
             <div className="bg-white/[0.02] rounded-lg p-3">
               <div className="text-[10px] text-white/30 uppercase mb-1">
-                Status
+                Tech Hub
               </div>
               <div className="text-white/70 capitalize">
-                {formData.currentSituation?.replace("-", " ") || "Not specified"}
+                {formData.preferredTechHub || "Not specified"}
               </div>
             </div>
             <div className="bg-white/[0.02] rounded-lg p-3">
@@ -321,7 +321,7 @@ export function VerdictView({
                 Academic
               </div>
               <div className="text-white/70">
-                {formData.cgpa ? `CGPA: ${formData.cgpa}` : "Not specified"}
+                {formData.academicScore || "Not specified"}
               </div>
             </div>
           </div>

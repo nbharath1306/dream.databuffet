@@ -2,13 +2,30 @@ import { create } from "zustand";
 
 // Types
 export interface ApplicationData {
+  // Q1: European tech hub preference
+  preferredTechHub: string;
+  // Q2: Python & LLM comfort level (1-5)
+  pythonLLMComfort: string;
+  // Q3: AI project/portfolio link
+  projectLink: string;
+  // Q4: Graduation year
+  graduationYear: string;
+  // Q5: GPA/CGPA or strongest subject
+  academicScore: string;
+  // Q6: AI tool or paper that changed thinking
+  aiInsight: string;
+  // Q7: Why should you be shortlisted (2-3 sentences)
+  whyShortlist: string;
+  // Q8: English meeting leadership ability
+  englishAbility: string;
+  // Q9: Full name
   name: string;
-  email: string;
-  cgpa: string;
+  // Q10: WhatsApp number
+  whatsappNumber: string;
+  // Q11: City and country
   location: string;
-  currentSituation: string;
-  failureReason: string;
-  motivation: string;
+  // Q12: Career barriers (honest assessment)
+  careerBarriers: string;
 }
 
 export interface AnalysisFlag {
@@ -153,18 +170,23 @@ const getLocationTier = (location: string): keyof typeof PRICING_TIERS => {
 };
 
 const initialFormData: ApplicationData = {
+  preferredTechHub: "",
+  pythonLLMComfort: "",
+  projectLink: "",
+  graduationYear: "",
+  academicScore: "",
+  aiInsight: "",
+  whyShortlist: "",
+  englishAbility: "",
   name: "",
-  email: "",
-  cgpa: "",
+  whatsappNumber: "",
   location: "",
-  currentSituation: "",
-  failureReason: "",
-  motivation: "",
+  careerBarriers: "",
 };
 
 export const useApplicationStore = create<ApplicationStore>((set, get) => ({
   currentStep: 0,
-  totalSteps: 7,
+  totalSteps: 12,
   formData: initialFormData,
   analysisFlags: [],
   isProcessing: false,
@@ -195,21 +217,26 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     // Trigger analysis based on field
     const { addAnalysisFlag } = get();
 
-    if (field === "cgpa" && value) {
-      const cgpaValue = parseFloat(value as string);
-      if (!isNaN(cgpaValue)) {
-        if (cgpaValue < 7) {
-          addAnalysisFlag({
-            type: "warning",
-            message: "⚠️ Academic Flag Detected. Protocol will compensate.",
-          });
-        } else if (cgpaValue >= 8.5) {
-          addAnalysisFlag({
-            type: "success",
-            message: "✓ Strong Academic Profile. Interview focus required.",
-          });
-        }
+    if (field === "pythonLLMComfort" && value) {
+      const level = parseInt(value as string);
+      if (level <= 2) {
+        addAnalysisFlag({
+          type: "warning",
+          message: "⚠️ Technical Gap Detected. Intensive training required.",
+        });
+      } else if (level >= 4) {
+        addAnalysisFlag({
+          type: "success",
+          message: "✓ Strong Technical Profile. Partner-ready skills.",
+        });
       }
+    }
+
+    if (field === "projectLink" && value) {
+      addAnalysisFlag({
+        type: "success",
+        message: "✓ Proof of Work submitted. Reviewing repository...",
+      });
     }
 
     if (field === "location" && value) {
@@ -237,24 +264,34 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
       }
     }
 
-    if (field === "currentSituation") {
-      if (value === "unemployed") {
+    if (field === "graduationYear" && value) {
+      const year = parseInt(value as string);
+      if (year >= 2024) {
         addAnalysisFlag({
           type: "info",
-          message: "📊 Priority Queue Activated. Faster placement track.",
-        });
-      } else if (value === "student") {
-        addAnalysisFlag({
-          type: "info",
-          message: "🎓 Student Mode Enabled. Campus hiring strategy unlocked.",
+          message: "🎓 Fresh Talent Track Activated. High-velocity profile.",
         });
       }
     }
 
-    if (field === "failureReason" && value) {
+    if (field === "englishAbility") {
+      if (value === "native" || value === "fluent") {
+        addAnalysisFlag({
+          type: "success",
+          message: "✓ Communication Ready. European partner compatible.",
+        });
+      } else if (value === "basic" || value === "intermediate") {
+        addAnalysisFlag({
+          type: "warning",
+          message: "⚠️ English coaching will be prioritized in training.",
+        });
+      }
+    }
+
+    if (field === "preferredTechHub" && value) {
       addAnalysisFlag({
         type: "info",
-        message: `🔍 Analyzing failure pattern: ${(value as string).replace("-", " ")}...`,
+        message: `🌐 Matching with ${(value as string).charAt(0).toUpperCase() + (value as string).slice(1)} ecosystem partners...`,
       });
     }
   },
@@ -275,27 +312,45 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     const locationTier = getLocationTier(formData.location);
     const pricingInfo = PRICING_TIERS[locationTier];
 
-    const diagnosisInfo =
-      DIAGNOSIS_MAP[formData.failureReason] || DIAGNOSIS_MAP.default;
+    // Generate diagnosis based on career barriers
+    const barriersDiagnosis = formData.careerBarriers.length > 50 
+      ? {
+          diagnosis: "Career Pathway Analysis Complete",
+          detail: "Based on your honest assessment, we've identified specific gaps that our 3-4 month training will address. Your self-awareness is the first step to transformation."
+        }
+      : DIAGNOSIS_MAP.default;
 
-    // Calculate risk and success probability
-    let successProbability = 75;
+    // Calculate risk and success probability based on new fields
+    let successProbability = 70;
     let riskLevel: "low" | "medium" | "high" = "medium";
 
-    const cgpa = parseFloat(formData.cgpa);
-    if (!isNaN(cgpa)) {
-      if (cgpa >= 8) successProbability += 10;
-      else if (cgpa < 6) successProbability -= 5;
+    // Python/LLM comfort level (1-5)
+    const pythonLevel = parseInt(formData.pythonLLMComfort);
+    if (!isNaN(pythonLevel)) {
+      successProbability += (pythonLevel - 3) * 5; // +/- based on level
     }
 
-    if (formData.currentSituation === "employed") {
-      successProbability += 5;
+    // Project link shows proof of work
+    if (formData.projectLink && formData.projectLink.includes("github")) {
+      successProbability += 10;
+    }
+
+    // English ability
+    if (formData.englishAbility === "native" || formData.englishAbility === "fluent") {
+      successProbability += 8;
       riskLevel = "low";
-    } else if (formData.currentSituation === "unemployed") {
-      successProbability += 8; // Higher motivation
+    } else if (formData.englishAbility === "basic") {
+      successProbability -= 5;
     }
 
-    if (formData.motivation.length > 100) {
+    // Graduation year - fresh talent bonus
+    const gradYear = parseInt(formData.graduationYear);
+    if (gradYear >= 2024) {
+      successProbability += 5;
+    }
+
+    // Why shortlist response quality
+    if (formData.whyShortlist.length > 100) {
       successProbability += 5;
     }
 
@@ -305,8 +360,8 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     else if (successProbability < 70) riskLevel = "high";
 
     return {
-      diagnosis: diagnosisInfo.diagnosis,
-      diagnosisDetail: diagnosisInfo.detail,
+      diagnosis: barriersDiagnosis.diagnosis,
+      diagnosisDetail: barriersDiagnosis.detail,
       basePrice: PRICING_TIERS.standard.price,
       finalPrice: pricingInfo.price,
       currency: pricingInfo.currency,

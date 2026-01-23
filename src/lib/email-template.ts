@@ -151,39 +151,32 @@ System generated. Do not reply.
 // Helper to generate personalized email
 export function generateFollowUpEmail(data: {
   name: string;
-  email: string;
-  failureReason: string;
+  whatsappNumber: string;
+  careerBarriers: string;
   location: string;
+  preferredTechHub: string;
   price: number;
   paymentLink: string;
 }) {
-  const candidateId = `${data.email.split("@")[0].toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
+  const candidateId = `${data.name.split(" ")[0].toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;
   
-  // Map failure reason codes to readable text
-  const failureReasonMap: Record<string, string> = {
-    interviews: "I freeze in interviews",
-    resume: "My resume gets ignored",
-    experience: "I don't have enough experience",
-    networking: "I don't know the right people",
-    skills: "I'm not sure what to learn",
-    confidence: "I don't feel qualified",
-    applications: "I apply but never hear back",
-  };
-  
-  const readableFailure = failureReasonMap[data.failureReason] || data.failureReason;
+  // Create a summary of the career barriers for email
+  const barriersSummary = data.careerBarriers.length > 50 
+    ? data.careerBarriers.substring(0, 100) + "..." 
+    : data.careerBarriers || "Not specified";
   
   return {
-    to: data.email,
+    to: data.whatsappNumber, // Will be replaced with email if added back
     subject: EMAIL_TEMPLATE.subject,
     text: EMAIL_TEMPLATE.plainText
       .replace(/\{\{name\}\}/g, data.name)
-      .replace(/\{\{failure_reason\}\}/g, readableFailure)
+      .replace(/\{\{failure_reason\}\}/g, barriersSummary)
       .replace(/\{\{location\}\}/g, data.location)
       .replace(/\{\{payment_link\}\}/g, data.paymentLink),
     html: EMAIL_TEMPLATE.html
       .replace(/\{\{name\}\}/g, data.name)
       .replace(/\{\{candidate_id\}\}/g, candidateId)
-      .replace(/\{\{failure_reason\}\}/g, readableFailure)
+      .replace(/\{\{failure_reason\}\}/g, barriersSummary)
       .replace(/\{\{location\}\}/g, data.location)
       .replace(/\{\{payment_link\}\}/g, data.paymentLink),
   };
